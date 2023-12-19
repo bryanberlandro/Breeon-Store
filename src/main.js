@@ -281,9 +281,7 @@ function modalCard(prod, key){
 
 let cartData = [];
 
-function cartItemsCard(prod, key){
-    
-}
+
 
 
 
