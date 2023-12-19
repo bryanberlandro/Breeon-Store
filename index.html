@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BREEON Store</title>
+
+    <link href="index.css" rel="stylesheet">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalnia:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <!-- Font -->
+
+    <!-- Icon -->
+    <script src="https://kit.fontawesome.com/9882d00535.js" crossorigin="anonymous"></script>
+    <!-- Icon -->
+</head>
+<body class="font-montserrat">
+
+    <!-- CART -->
+    <!-- <div class="fixed flex h-[100vh] w-64 bg-white z-40">
+
+    </div> -->
+    <!-- CART END -->
+
+    <!-- MODAL -->
+    <div class="modal-container w-full h-[100vh] fixed z-40 backdrop-blur-md bg-white bg-opacity-50 hidden justify-center items-center px-[5%]">
+        <div class="modal-wrapper w-full">
+
+        </div>
+    </div>
+    <!-- MODAL END -->
+
+    <header class="h-14 flex items-center px-4 fixed w-full justify-between md:h-[60px] md:px-[5%] md:items-center xl:px-[5%] text-black transition-all duration-500 z-50 xl:items-center">
+        <h1 class="md:text-xl  xl:text-2xl font-kalnia text-white">BREEON</h1>
+        <nav class="w-48 bg-primary h-[92vh] fixed right-0 bottom-0 -translate-y-2 sidebar translate-x-96 transition duration-700 ease-in-out py-4 px-4  md:relative md:h-full md:w-max md:flex md:items-center md:translate-x-0 md:bg-transparent md:-translate-y-0 md:py-0 xl:h-max xl:flex xl:items-center xl:relative xl:-translate-y-0">
+            <ul class="flex flex-col gap-8 md:flex-row xl:gap-20 md:items-center md:text-base md:h-full xl:h-max">
+                <li class="w-full border-b-2 border-b-white py-4 hover:bg-white hover:text-black hover:px-2 transition-all duration-500 text-white text-sm md:border-none md:text-base md:font-normal md:text-white md:hover:text-black md:hover:px-0 md:hover:bg-transparent">
+                    <a href="">Popular</a>
+                </li>
+                <li class="w-full border-b-2 border-b-white py-4 hover:bg-white hover:text-black hover:px-2 transition-all duration-500 text-white text-sm md:border-none md:text-base md:font-normal md:text-white md:hover:text-black md:hover:px-0 md:hover:bg-transparent">
+                    <a href="">Men</a>
+                </li>
+                <li class="w-full border-b-2 border-b-white py-4 hover:bg-white hover:text-black hover:px-2 transition-all duration-500 text-white text-sm md:border-none md:text-base md:font-normal md:text-white md:hover:text-black md:hover:px-0 md:hover:bg-transparent">
+                    <a href="">Woman</a>
+                </li>
+                <li class="w-full border-b-2 border-b-white py-4 hover:bg-white hover:text-black hover:px-2 transition-all duration-500 text-white text-sm md:border-none md:text-base md:font-normal md:text-white md:hover:text-black md:hover:px-0 md:hover:bg-transparent">
+                    <a href="">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="w-64 h-full flex  items-center gap-4 justify-end md:w-max text-white md:gap-8">
+            <div class="flex search-wrapper relative items-center w-44 gap-2 px-2 rounded-sm md:w-32 xl:w-52 ">
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 xl:w-6 xl:h-6 ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                      </svg>         
+                </div>
+                <input type="text" onkeyup="searchProduct()" name="search" id="search-box" class="outline-none w-full border-b-2 px-2 bg-transparent" autocomplete="off">         
+                <div class="absolute w-64 h-60 right-0 py-2 bg-white z-50 top-0 -translate-y-96 transition duration-700 ease-in-out opacity-0 shadow-md search-product-wrapper md:w-80 md:h-80">
+                    <div class="w-5 h-5 rotate-45 bg-white absolute -translate-y-2 right-3 top-0 z-50"></div>
+                    <div class="product w-full relative  h-full overflow-y-scroll py-4 px-2 list-search-product">
+                        <div class="flex flex-col gap-2 h-max search-item-wrapper">
+                            <div class="item-not-found w-full bg-black py-4 text-white text-center hidden">
+                                <p>Item Not Found</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 xl:w-6 xl:h-6" onclick="showCart()">
+                    <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 004.25 22.5h15.5a1.875 1.875 0 001.865-2.071l-1.263-12a1.875 1.875 0 00-1.865-1.679H16.5V6a4.5 4.5 0 10-9 0zM12 3a3 3 0 00-3 3v.75h6V6a3 3 0 00-3-3zm-3 8.25a3 3 0 106 0v-.75a.75.75 0 011.5 0v.75a4.5 4.5 0 11-9 0v-.75a.75.75 0 011.5 0v.75z" clip-rule="evenodd" />
+                  </svg>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 xl:w-6 xl:h-6">
+                    <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                  </svg>                  
+            </div>
+            <div onclick="showSidebar()" class="block md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                  </svg>                  
+            </div>
+        </div>
+    </header>
+    
+    <main class="">
+        <section id="home" class="w-full h-[100vh] overflow-hidden relative flex justify-center items-center bg-gradient-to-br from-zinc-600 to-white md:h-[100vh]">
+                <img src="/assets/image/men-women-model.jpg" alt="" class="object-cover w-full h-full mix-blend-multiply absolute">
+            <div class="z-10 px-4 py-4 flex flex-col gap-20 w-full text-center text-white items-center">
+                <div class="relative ">
+                    <h1 class="font-kalnia text-[70px] translate-y-20 opacity-0 transition duration-500 font-normal md:text-9xl title" >BREEON</h1>
+                    <p class="text-sm text-slate-200 translate-y-20 opacity-0 transition duration-500 md:text-lg description">An Exclusive Shirt For <span class="font-bold text-white">Man</span> and <span class="font-bold text-white">Woman</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="px-4 py-20 md:px-[5%] xl:flex xl:gap-6 xl:px-[5%]">
+            <div class="xl:w-[50%] xl:px-2">
+                <div class="mb-6">
+                    <h1 class="font-kalnia text-xl font-semibold md:text-2xl">WHO WE ARE ?</h1>
+                    <div class="w-32 h-1 mt-1 bg-tertiary"></div>
+                </div>
+                <p>In 2019, in Indonesia, I have a vision, where I want to create a clothing design that is <span class="font-semibold">simple</span> but still looks <span class="font-semibold">attractive</span> and also has <span class="font-semibold">elegant characteristics</span>.</p>
+            </div>
+
+            <div class="mt-14  xl:w-[50%]">
+                <div class="mb-6">
+                    <h1 class="font-kalnia text-xl font-semibold md:text-2xl">WHAT WE OFFER ?</h1>
+                    <div class="w-32 h-1 mt-1 bg-tertiary"></div>
+                </div>
+                <p class=""><span class="font-semibold">good quality</span>, using the best materials, modern design and at an <span class="font-semibold">affordable price</span>. and there are also <span class="font-semibold">no costs</span> for shipping goods, and what makes our goods exclusive is because our stock is <span class="font-semibold">limited</span></p>
+                <button class="bg-secondary text-white w-full mt-12 px-10 py-3 md:py-4 md:w-64">DISCOVER NOW</button>
+            </div>
+        </section>
+        <!-- About -->
+
+        <!-- Category -->
+        <section class="px-[5%] w-full py-20 h-[100vh] flex flex-col gap-6 md:h-max ">
+            <div class="w-full xl:mb-10">
+                <h1 class="font-kalnia text-xl font-bold md:text-2xl">CATEGORY</h1>
+                <div class="w-20 h-1 bg-secondary mt-2"></div>
+            </div>
+            <div class="w-full flex flex-col gap-6 xl:flex xl:flex-row xl:gap-2">
+                <div class="w-full h-60 mt-10 overflow-hidden transition-all duration-200 ease-in cursor-pointer relative shadow-xl bg-gradient-to-r from-zinc-900 to-white flex justify-center items-center xl:w-[50%] xl:mt-0 xl:hover:scale-[.98] ">
+                    <img src="/assets/image/man-model.jpg" alt="" class="absolute w-full h-full object-cover mix-blend-multiply">
+                    <div class="relative text-2xl text-white font-bold tracking-[0.5em] font-kalnia md:text-6xl">
+                        <h1>MEN</h1>
+                    </div>
+                </div>
+                <div class="w-full h-60 overflow-hidden transition-all duration-200 ease-in cursor-pointer shadow-xl relative bg-gradient-to-l from-zinc-900 to-white flex justify-center items-center xl:w-[50%] xl:hover:scale-[.98]">
+                    <img src="/assets/image/women-model.jpg" alt="" class="absolute mix-blend-multiply">
+                    <div class="relative text-2xl text-white font-bold tracking-[0.5em] font-kalnia md:text-6xl">
+                        <h1>WOMEN</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Category -->
+
+        <!-- Featured -->
+        <section class="w-full py-10 px-[5%]">
+            <h1 class="font-kalnia font-semibold md:text-2xl">AS FEATURED IN</h1>
+            <div class="flex gap-4 items-center flex-wrap mt-8 md:justify-between">
+                <div class="relative overflow-hidden w-14 h-14 md:w-16 md:h-16 ">
+                    <svg role="img" class="opacity-60" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>H&amp;M</title><path d="M16.866 4.565c.871-.429 1.303-.372 1.313.061.012.565-.071 1.313-.131 1.857-.323 2.947-.864 5.356-.906 8.383 1.424-3.686 2.619-6.248 4.156-9.403.488-1.004.799-.818 1.2-.996 1.563-.695 1.622-.268 1.417.581-.758 3.15-2.695 13.068-2.992 14.595-.086.442-.566.255-.691.082-.556-.769-1.183-.781-1.112-1.293.348-2.546 1.603-8.934 1.93-10.439-1.669 3.42-3.398 7.694-4.286 10.118-.189.515-.531.477-.745.1-.3-.529-.883-.799-.979-1.424-.306-1.987.348-5.776.439-8.172-.908 2.618-2.433 7.701-3.101 9.997-.276.95-1.193.795-.949-.131 1.015-3.854 3.201-10.67 4.148-13.121.222-.576.805-.556 1.289-.795Zm-5.535-.474c.276.067.254.393.085.838-.499 1.314-1.19 3.04-1.981 5.076.497-.057.767-.076.767-.076.713-.088.846.269.645.648-.16.303-.353.101-1.02 1.096-.376.561-.99.709-1.332.784-.821 2.175-1.702 4.602-2.557 7.188-.125.377-.489.295-.598.142-.402-.562-.698-.58-1.01-1.034-.037-.074-.11-.173-.066-.354.229-.936.837-2.859 1.762-5.392-1.165.253-2.426.524-2.947.645-.624 1.651-1.234 3.308-1.811 4.944-.358 1.015-1.29.819-.963-.141.521-1.528 1.096-3.115 1.673-4.654-.646-.069-.864-.525-1.225-.906-.139-.147-.443-.126-.592-.332-.267-.371-.241-.536.377-.714.806-.233 1.617-.449 2.432-.649 1.044-2.694 1.987-5.006 2.49-6.239.388-.951 1.387-.862 1.008.075-.772 1.906-1.563 3.885-2.344 5.893.963-.217 1.931-.409 2.904-.576.713-1.831 1.462-3.648 2.247-5.449.055-.126.215-.304.381-.332.525-.09 1.379-.552 1.675-.481ZM9.543 16.426c.082-.05.163-.111.244-.178-.062-.183-.123-.366-.183-.55-.061.078-.12.157-.179.237-.349.479-.142.65.118.491Zm.465-2.275c.433-.489-.423-.693-.226.054.011.042.025.092.04.146.063-.065.125-.132.186-.2Zm.45 1.473c.429-.372.838-.003.414.624a6.955 6.955 0 0 1-.307.424c.045.128.091.255.14.381.219.562-.357.703-.542.237a7.29 7.29 0 0 1-.05-.129c-.35.31-.754.505-1.186.37-.711-.221-.892-1.222-.228-1.993.266-.309.466-.524.634-.695-.041-.133-.081-.267-.118-.401-.087-.312-.164-.675.148-1.046.586-.695 1.945-.078 1.257.992-.165.258-.359.501-.561.748.07.221.14.441.212.661.061-.06.123-.117.187-.173Z"/></svg>
+                </div>
+                <div class="relative overflow-hidden w-14 h-14 md:w-16 md:h-16 ">
+                    <svg role="img" class="opacity-60" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Under Armour</title><path d="M15.954 12c-.089.066-.195.142-.324.233-.826.585-2.023.985-3.58.985h-.104c-1.556 0-2.755-.4-3.58-.985A36.43 36.43 0 018.042 12c.09-.067.196-.143.324-.234.825-.584 2.024-.985 3.58-.985h.104c1.557 0 2.756.401 3.58.985.129.09.235.167.325.234M24 7.181s-.709-.541-2.95-1.365c-1.968-.721-3.452-.883-3.452-.883l.006 4.243c0 .598-.162 1.143-.618 1.765-1.672-.61-3.254-.985-4.981-.985-1.728 0-3.308.375-4.98.985-.457-.619-.62-1.168-.62-1.765l.007-4.243s-1.494.16-3.463.883C.709 6.642 0 7.181 0 7.181c.093 1.926 1.78 3.638 4.435 4.82C1.777 13.18.09 14.887 0 16.818c0 0 .709.54 2.949 1.365 1.968.721 3.453.883 3.453.883l-.007-4.244c0-.597.164-1.143.619-1.764 1.672.61 3.252.983 4.98.983 1.727 0 3.309-.374 4.98-.983.457.62.62 1.167.62 1.764l-.006 4.244s1.484-.16 3.452-.883c2.241-.826 2.95-1.365 2.95-1.365-.093-1.927-1.78-3.64-4.435-4.819 2.657-1.182 4.343-2.888 4.435-4.82"/></svg>
+                </div>
+                <div class="relative overflow-hidden w-14 h-14 md:w-16 md:h-16 ">
+                    <svg role="img" class="opacity-60" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Nike</title><path d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.12 0-1.933-.392-2.437-1.177-.317-.504-.41-1.143-.28-1.918.13-.775.476-1.6 1.036-2.478.467-.71 1.232-1.643 2.297-2.8a6.122 6.122 0 00-.784 1.848c-.28 1.195-.028 2.072.756 2.632.373.261.886.392 1.54.392.522 0 1.11-.084 1.764-.252L24 7.8z"/></svg>
+                </div>
+                <div class="relative overflow-hidden w-14 h-14 md:w-16 md:h-16 ">
+                    <svg role="img" class="opacity-60" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>New York Times</title><path d="M21.272,14.815h-0.098c-0.747,2.049-2.335,3.681-4.363,4.483v-4.483l2.444-2.182l-2.444-2.182V7.397 c2.138,0.006,3.885-1.703,3.927-3.84c0-2.629-2.509-3.556-3.927-3.556c-0.367-0.007-0.734,0.033-1.091,0.12v0.131h0.556 c0.801-0.141,1.565,0.394,1.706,1.195C17.99,1.491,17.996,1.537,18,1.583c-0.033,0.789-0.7,1.401-1.488,1.367 c-0.02-0.001-0.041-0.002-0.061-0.004c-2.444,0-5.323-1.985-8.454-1.985C5.547,0.83,3.448,2.692,3.284,5.139 C3.208,6.671,4.258,8.031,5.76,8.346v-0.12C5.301,7.931,5.041,7.407,5.084,6.862c0.074-1.015,0.957-1.779,1.973-1.705 C7.068,5.159,7.08,5.16,7.091,5.161c2.629,0,6.872,2.182,9.501,2.182h0.098v3.142l-2.444,2.182l2.444,2.182v4.549 c-0.978,0.322-2.003,0.481-3.033,0.469c-1.673,0.084-3.318-0.456-4.614-1.516l4.429-1.985V7.451l-6.196,2.727 c0.592-1.75,1.895-3.168,3.589-3.905V6.175c-4.516,1.004-8.138,4.243-8.138,8.705c0,5.193,4.025,9.12,9.818,9.12 c6.011,0,8.727-4.363,8.727-8.814V14.815z M8.858,18.186c-1.363-1.362-2.091-3.235-2.007-5.16c-0.016-0.88,0.109-1.756,0.371-2.596 l2.051-0.938v8.476L8.858,18.186z"/></svg>
+                </div>
+                <div class="relative overflow-hidden w-14 h-14 md:w-16 md:h-16 ">
+                    <svg role="img" class="opacity-60" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>NBC</title><path d="M9.2311 5.1133c-.0856 0-.17.0046-.2535.0137-1.1654.0246-2.913 1.4087-2.1361 3.5226l3.5923 8.4556 1.2623-8.8928c.2731-2.0726-1.1819-3.0988-2.465-3.099zm5.5518.0007c-1.2106.0232-2.572.9086-2.5037 2.7767h.6792s.3647 0 .4136.1702c-.2673.2187-.9957.2433-.8983 1.4087l1.1403 7.6543 3.5686-8.48c.728-1.8952-.8014-3.4749-2.1606-3.5234a2.485 2.485 0 0 0-.239-.0065zM4.5193 8.2612c-.5946.0034-1.2038.2247-1.7319.6714-.9948.8996-1.3593 2.9404.4373 4.1315l7.161 4.9078-3.4717-7.9465c-.4552-1.17-1.4037-1.7699-2.3947-1.7642zm14.9926.0876c-.9196-.0364-1.9235.4203-2.4973 1.8145l-3.374 7.848 7.161-4.932c1.6506-1.1666 1.3844-3.038.4616-3.9608-.3717-.4146-1.036-.7414-1.7513-.7697zm2.0457 5.3608c-.4926-.016-1.0179.1221-1.5337.4639l-6.7237 4.6895h8.2775c1.699-.0002 2.7935-1.7504 2.3056-3.3532-.317-.986-1.242-1.765-2.3257-1.8002zm-18.9813.0008c-.4833-.0185-.9458.102-1.347.3453a2.479 2.479 0 0 0-.4222.326c-.009.0086-.019.0157-.028.0244-.277.2715-.5042.6174-.662 1.0304h.0014c-.1663.592-.1501 1.1507.0022 1.6393v.0007c.0914.2932.2316.561.4114.7956.06.0783.1247.1527.1931.2233.478.4933 1.1513.7913 1.8942.7913h8.154l-6.7237-4.6888c-.4853-.3113-.99-.469-1.4734-.4875Z"/></svg>
+                </div>
+            </div>
+            
+        </section>
+        <!-- Featured -->
+
+        <!-- Best Seller -->
+        <section class="w-full px-[5%] py-20 overflow-hidden">
+            <div class="flex w-full justify-between items-center">
+                <h1 class="font-kalnia font-semibold text-xl">BEST SELLER</h1>
+                <p class="text-tertiary text-sm">View all</p>
+            </div>
+            <div class="w-full relative mt-6  xl:overflow-hidden">
+                <div class="flex w-full justify-between absolute h-full items-center">
+                    <button class="bg-transparent -translate-x-5 p-2 z-10" data-button="previous">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 md:w-8 md:h-8 ">
+                            <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
+                          </svg>                      
+                    </button>
+                    <button class="bg-transparent translate-x-5 p-2 z-10" data-button="next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 md:w-8 md:h-8 ">
+                            <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
+                          </svg>                      
+                    </button>
+                </div>
+                <div class="relative w-full">
+                    <div class="relative overflow-scroll flex gap-2 w-max best-product-wrapper">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Best Seller -->
+
+        <!-- ANIVERSARY --> 
+        <section class="w-full h-[50vh] relative bg-gradient-to-r from-zinc-700 to-white my-10 flex flex-col justify-between md:my-0 md:h-[100vh] md:justify-center md:gap-20 xl:justify-end xl:gap-10 xl:my-10">
+            <img src="/assets/image/man-women-model-2.jpg" alt="" class="absolute mix-blend-multiply w-full h-full object-cover">
+            <div class="relative px-4 py-4 text-white md:px-8 md:py-8 xl:px-[5%] xl:py-16">
+                <h1 class="font-kalnia font-normal text-4xl md:text-[150px]">BREEON</h1>
+                <h1 class="font-kalnia text-8xl font-bold md:text-[150px] md:mt-10">2<sup class="text-xl md:text-2xl">nd</sup></h1>
+                <p class="text-base font-kalnia md:text-2xl md:tracking-wider">ANNIVERSARY</p>
+            </div>
+            <div class="text-white relative w-full flex flex-col gap-2 items-center py-4 md:mt-40 md:gap-4 xl:mt-10 xl:py-8">
+                <h1 class="md:text-2xl">Shop our exclusive anniversary items</h1>
+                <div class="flex gap-2">
+                    <button class="py-2 px-2 w-40 text-black bg-white border-2 border-white md:w-64 md:text-2xl md:py-3 xl:w-80">MEN</button>
+                    <button class="py-2 px-2 w-40 text-white border-2 border-white md:w-64 md:text-2xl md:py-3 xl:w-80">WOMEN</button>
+                </div>
+            </div>
+        </section>
+        <!-- ANIVERSARY -->
+
+        <!-- ANIV COLLEECTION -->
+        <section class="w-full px-[5%] py-10 overflow-hidden">
+            <h1 class="font-kalnia font-semibold text-xl">ANNIVERSARY COLLEECTION</h1>
+            <div class="w-full relative mt-6  xl:overflow-hidden">
+                <div class="flex w-full justify-between absolute h-full items-center">
+                    <button class="bg-transparent -translate-x-5 p-2 z-10" data-button="previous">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 md:w-8 md:h-8 ">
+                            <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
+                          </svg>                      
+                    </button>
+                    <button class="bg-transparent translate-x-5 p-2 z-10" data-button="next">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 md:w-8 md:h-8 ">
+                            <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
+                          </svg>                      
+                    </button>
+                </div>
+                <div class="relative w-full">
+                    <div class="relative overflow-scroll flex gap-2 w-max aniv-collection-wrapper">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ANIV COLLEECTION -->
+
+        <!-- FOUNDER -->
+        <section class="w-full h-[50vh] relative overflow-hidden flex items-end xl:h-[100vh] xl:my-10">
+            <img src="/assets/image/founder.jpg" alt="" class="absolute w-full">
+            <div class="flex flex-col items-center justify-end w-full px-[5%] py-10 gap-2 md:gap-10">
+                <div class="relative text-white font-semibold text-xl font-kalnia tracking-wider md:text-6xl xl:text-[100px]">
+                    <h1>FOUNDER BREEON</h1>
+                </div>
+                <div class="relative text-white flex justify-between w-full text-sm font-kalnia md:text-2xl xl:justify-center xl:gap-20">
+                    <p>BRYAN</p>
+                    <p>DEVI</p>
+                    <p>TRAVIS</p>
+                </div>
+            </div>
+        </section>
+        <!-- FOUNDER -->
+
+
+        <!-- VIP -->
+        <section class="w-full bg-gradient-to-br gap-8 my-20 md:px-[5%] xl:px-[5%]">
+            <div class="w-full flex flex-col px-[5%] bg-gradient-to-br from-secondary to-primary text-white py-10 gap-8 md:flex-row xl:justify-center">
+                <div class="md:w-96">
+                    <h1 class="text-xl font-bold md:text-4xl xl:text-3xl">VIP BREEON</h1>
+                    <p class="mt-2">Bonus? Receive 20% off your first purchase, and free shipping after signing up</p>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <input type="text" placeholder="your email" required class="px-4 py-2 w-full bg-transparent border-2 border-white  text-white focus:border-white focus:border-2 focus:outline-none md:py-4 xl:py-3">
+                    <button class="w-full bg-white font-semibold py-2 text-black md:py-4 xl:py-3">SUBSCRIBE</button>
+                    <div class="flex gap-2 items-start md:mt-4">
+                        <input type="checkbox" name="agree-terms" id="agree-terms" class="w-6 h-6 checked:accent-tertiary md:w-8 md:h-8 xl:w-6 xl:h-6">
+                        <label for="agree-terms" class="md:text-base text-slate-300">
+                            By clicking the subscribe button, i agree to the <u class="underline-offset-2 text-white">Terms and Conditions</u>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- VIP -->
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full h-max bg-primary text-white">
+        <div class="w-full flex h-max flex-col relative xl:flex-row">
+            <div class=" px-[5%] py-4 text-sm text-slate-300 border-b-2 border-white md:text-lg xl:w-[35%] xl:border-none  xl:text-sm">
+                <h1 class="font-semibold text-lg text-white md:text-2xl">BREEON</h1>
+                <p class="">an exclusive brand from Indonesia with limited design and premium quality</p>
+                <p class="mt-2">Jl. Apel IV Blok B-1 / 1</p>
+                <p>+62 811 765 32</p>
+                <div class="mt-4">
+                    <p class="text-white font-semibold text-lg">FOLLOW US</p>
+                    <div class=" flex gap-3 mt-2 text-white text-base">
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-facebook"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col px-[5%] xl:flex-row xl:justify-between xl:w-full ">
+                <div class="px-[5%] py-4 border-b-2 border-slate-400 footer-content xl:px-0 xl:border-none">
+                    <div class="flex w-full justify-between items-center">
+                        <h1 class="font-semibold">COMPANY</h1>
+                        <div class="plus-icon xl:hidden">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class=" hidden minus-icon xl:hidden">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm list-none pl-4 pt-2 flex-col gap-2 text-slate-300 footer-list hidden md:gap-10 md:text-base xl:flex xl:gap-2 xl:pl-0 xl:text-sm">
+                        <li>
+                            <a href="">About US</a>
+                        </li>
+                        <li>
+                            <a href="">Terms and Conditions</a>
+                        </li>
+                        <li>
+                            <a href="">Privacy Policy</a>
+                        </li>
+                    </div>
+                </div>
+                <div class="px-[5%] py-4 border-b-2 border-slate-400 footer-content xl:px-0 xl:border-none">
+                    <div class="flex w-full justify-between items-center">
+                        <h1 class="font-semibold">GET TO KNOW US</h1>
+                        <div class="plus-icon xl:hidden">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class=" hidden minus-icon xl:hidden">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm list-none pl-4 pt-2 flex-col gap-2 text-slate-300 footer-list hidden md:gap-10 md:text-base xl:pl-0 xl:flex xl:gap-2 xl:text-sm">
+                        <li>
+                            <a href="">Careers</a>
+                        </li>
+                        <li>
+                            <a href="">Press</a>
+                        </li>
+                        <li>
+                            <a href="">Affiliate Program</a>
+                        </li>
+                    </div>
+                </div>
+                <div class="px-[5%] py-4 border-b-2 border-slate-400 footer-content xl:px-0 xl:border-none">
+                    <div class="flex w-full justify-between items-center">
+                        <h1 class="font-semibold">EXPLORE</h1>
+                        <div class="plus-icon xl:hidden">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class=" hidden minus-icon xl:hidden">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm list-none pl-4 pt-2 flex-col gap-2 text-slate-300 footer-list hidden md:gap-10 md:text-base xl:pl-0 xl:flex xl:gap-2 xl:text-sm">
+                        <li>
+                            <a href="">Holiday Shipping</a>
+                        </li>
+                        <li>
+                            <a href="">Shopping Benefits</a>
+                        </li>
+                        <li>
+                            <a href="">The Breeon Club</a>
+                        </li>
+                        <li>
+                            <a href="">Breeon Stories</a>
+                        </li>
+                        <li>
+                            <a href="">Berkah Week</a>
+                        </li>
+                    </div>
+                </div>
+                <div class="px-[5%] py-4  footer-content xl:px-0">
+                    <div class="flex w-full justify-between items-center">
+                        <h1 class="font-semibold">CONTACT US</h1>
+                        <div class="plus-icon xl:hidden">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class=" hidden minus-icon xl:hidden">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm list-none pl-4 pt-2 flex-col gap-2 text-slate-300 footer-list hidden md:gap-10 md:text-base xl:pl-0 xl:flex xl:gap-2 xl:text-sm">
+                        <li>
+                            <a href="">Whatsapp</a>
+                        </li>
+                        <li>
+                            <a href="">E-mail</a>
+                        </li>
+                        <li>
+                            <a href="">Message</a>
+                        </li>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full border-t-2 border-white h-14 relative flex items-center justify-between px-[5%] text-sm">
+            <p>COPYRIGHT</p>
+            <p>BREEON</p>
+        </div>
+    </footer>
+    <!-- FOOTER -->
+
+    <script src="main.js"></script>
+</body>
+</html>
